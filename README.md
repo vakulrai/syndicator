@@ -33,7 +33,13 @@ use case follow
 
 Create a new project using Composer:
 ```
-composer create-project --no-interaction acquia/drupal-recommended-project
+ddev start
+ddev composer install
+ddev drush updb
+ddev drush cim -y
+ddev composer require acquia/blt
+ddev ssh
+blt setup -n
 ```
 
 Once you create the project, you can and should customize `composer.json` and
