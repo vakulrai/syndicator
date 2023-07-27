@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * Module file.
+ */
+
+/**
+ * Implements hook_entity_type_build().
+ */
+function api_contributors_om_entity_type_build(array &$entity_types) {
+  if (isset($entity_types['contributors'])) {
+    $entity_types['contributors']->setListBuilderClass('Drupal\api_contributors_om\Entity\ContributorsListBuilder');
+  }
+}

@@ -1,0 +1,10 @@
+entity.contributors.collection:
+  title: 'Contributors'
+  route_name: entity.contributors.collection
+  parent: system.admin_structure
+  weight: 99
+  menu_name: admin
+
+
+
+
