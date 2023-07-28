@@ -1,0 +1,6 @@
+entity.contributors.add_form:
+  title: 'Add Contributor'
+  route_name: entity.contributors.add_form
+  weight: 0
+  appears_on:
+    - entity.contributors.collection
