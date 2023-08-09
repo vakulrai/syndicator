@@ -29,10 +29,20 @@ function api_contributors_om_theme() {
  *     fields attached to the entity.
  *   - attributes: HTML attributes for the containing element.
  */
-function template_preprocess_contributors(array &$variables) {
+function template_preprocess_contributors(array &$variables): void {
   $variables['view_mode'] = $variables['elements']['#view_mode'];
   foreach (Element::children($variables['elements']) as $key) {
     $variables['content'][$key] = $variables['elements'][$key];
   }
 }
 
+// Example to fetch comments of a user.
+// function api_contributors_om_preprocess(){
+//   $filters = [
+//     'name' => 'omkar-pd',
+//     'limit' => 50,
+//     'sort' => 'created',
+//     'direction' => 'desc',
+// ];
+//   $response = \Drupal::service('api_contributors_om.profile')->sendRequest('comment', $filters);
+// }

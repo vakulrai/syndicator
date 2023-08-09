@@ -2,11 +2,11 @@
 
 namespace Drupal\api_contributors_om\Entity;
 
+use Drupal\api_contributors_om\ContributorsInterface;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
-use Drupal\api_contributors_om\ContributorsInterface;
 
 /**
  * Defines the contributors entity class.
@@ -80,7 +80,7 @@ class Contributors extends ContentEntityBase implements ContributorsInterface {
       ->setLabel(t('Changed'))
       ->setDescription(t('The time that the contributors was last edited.'));
 
-      $fields['drupal_org_id'] = BaseFieldDefinition::create('integer')
+    $fields['drupal_org_id'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Drupal Org ID'))
       ->setDescription(t('The ID of the Drupal.org organization.'))
       ->setRequired(TRUE)

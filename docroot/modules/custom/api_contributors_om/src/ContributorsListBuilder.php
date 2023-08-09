@@ -16,10 +16,8 @@ class ContributorsListBuilder extends EntityListBuilder {
 
   /**
    * The date formatter service.
-   *
-   * @var \Drupal\Core\Datetime\DateFormatterInterface
    */
-  protected $dateFormatter;
+  protected DateFormatterInterface $dateFormatter;
 
   /**
    * Constructs a new ContributorsListBuilder object.

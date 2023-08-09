@@ -1,0 +1,4 @@
+services:
+  api_contributors_om.profile:
+    class: Drupal\api_contributors_om\Service\Profile
+    arguments: ['@http_client']
