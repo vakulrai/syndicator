@@ -2,14 +2,37 @@
 
 /**
  * @file
- * Module file.
+ * Provides a contributors entity type.
  */
 
+use Drupal\Core\Render\Element;
+
 /**
- * Implements hook_entity_type_build().
+ * Implements hook_theme().
  */
-function api_contributors_om_entity_type_build(array &$entity_types) {
-  if (isset($entity_types['contributors'])) {
-    $entity_types['contributors']->setListBuilderClass('Drupal\api_contributors_om\Entity\ContributorsListBuilder');
+function api_contributors_om_theme() {
+  return [
+    'contributors' => [
+      'render element' => 'elements',
+    ],
+  ];
+}
+
+/**
+ * Prepares variables for contributors templates.
+ *
+ * Default template: contributors.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An associative array containing the contributors information and any
+ *     fields attached to the entity.
+ *   - attributes: HTML attributes for the containing element.
+ */
+function template_preprocess_contributors(array &$variables) {
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
   }
 }
+

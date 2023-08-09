@@ -1,8 +1,0 @@
-api_contributors_om.contributors:
-  type: entity
-  label: 'Contributors'
-  base_table: contributors
-  admin_permission: 'administer contributors'
-  entity_keys:
-    id: id
-    label: drupal_org_username

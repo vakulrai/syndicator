@@ -1,10 +1,10 @@
-entity.contributors.collection:
+entity.contributors.settings:
   title: 'Contributors'
-  route_name: entity.contributors.collection
+  description: 'Configure a Contributors entity type.'
+  route_name:  entity.contributors.settings
   parent: system.admin_structure
-  weight: 99
-  menu_name: admin
-
-
-
-
+entity.contributors.collection:
+  title: 'Contributorss'
+  description: 'List of contributorss.'
+  route_name: entity.contributors.collection
+  parent: system.admin_content
