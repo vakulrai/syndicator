@@ -1,0 +1,22 @@
+entity.contributors.settings:
+  title: 'Settings'
+  route_name: entity.contributors.settings
+  base_route: entity.contributors.settings
+entity.contributors.view:
+  title: 'View'
+  route_name: entity.contributors.canonical
+  base_route: entity.contributors.canonical
+entity.contributors.edit_form:
+  title: 'Edit'
+  route_name: entity.contributors.edit_form
+  base_route: entity.contributors.canonical
+entity.contributors.delete_form:
+  title: 'Delete'
+  route_name: entity.contributors.delete_form
+  base_route: entity.contributors.canonical
+  weight: 10
+entity.contributors.collection:
+  title: 'Contributorss'
+  route_name: entity.contributors.collection
+  base_route: system.admin_content
+  weight: 10

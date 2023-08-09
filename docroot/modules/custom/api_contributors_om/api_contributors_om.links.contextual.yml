@@ -1,0 +1,10 @@
+entity.contributors.edit_form:
+  route_name: entity.contributors.edit_form
+  group: contributors
+  title: Edit
+
+entity.contributors.delete_form:
+  route_name: entity.contributors.delete_form
+  group: contributors
+  title: Delete
+  weight: 10

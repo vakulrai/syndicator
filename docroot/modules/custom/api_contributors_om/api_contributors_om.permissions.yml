@@ -1,0 +1,3 @@
+administer contributors:
+  title: 'Administer contributors settings'
+  restrict access: true

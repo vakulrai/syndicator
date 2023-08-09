@@ -2,92 +2,43 @@
 
 namespace Drupal\api_contributors_om\Form;
 
-use Drupal\Core\Form\FormBase;
+use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Messenger\MessengerInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Form for adding a new Contributor entity.
+ * Form controller for the contributors entity edit forms.
  */
-class ContributorsForm extends FormBase {
-
-
-  /**
-   * The messenger service.
-   *
-   * @var \Drupal\Core\Messenger\MessengerInterface
-   */
-  protected $messenger;
-
-  /**
-   * Constructs a new ContributorsForm instance.
-   *
-   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
-   *   The messenger service.
-   */
-  public function __construct(MessengerInterface $messenger) {
-    $this->messenger = $messenger;
-  }
+class ContributorsForm extends ContentEntityForm {
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('messenger')
-    );
-  }
+  public function save(array $form, FormStateInterface $form_state) {
+    $result = parent::save($form, $form_state);
 
-  /**
-   * {@inheritdoc}
-   */
-  public function getFormId() {
-    return 'contributors_form';
-  }
+    $entity = $this->getEntity();
 
-  /**
-   * {@inheritdoc}
-   */
-  public function buildForm(array $form, FormStateInterface $form_state) {
-    // Add form elements here for the fields you want users to enter.
-    $form['drupal_id'] = [
-      '#type' => 'number',
-      '#title' => $this->t('Drupal ID'),
-      '#required' => TRUE,
+    $message_arguments = ['%label' => $entity->toLink()->toString()];
+    $logger_arguments = [
+      '%label' => $entity->label(),
+      'link' => $entity->toLink($this->t('View'))->toString(),
     ];
 
-    $form['drupal_org_username'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Drupal.org Username'),
-      '#required' => TRUE,
-    ];
+    switch ($result) {
+      case SAVED_NEW:
+        $this->messenger()->addStatus($this->t('New contributors %label has been created.', $message_arguments));
+        $this->logger('api_contributors_om')->notice('Created new contributors %label', $logger_arguments);
+        break;
 
-    $form['actions']['submit'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Save'),
-    ];
+      case SAVED_UPDATED:
+        $this->messenger()->addStatus($this->t('The contributors %label has been updated.', $message_arguments));
+        $this->logger('api_contributors_om')->notice('Updated contributors %label.', $logger_arguments);
+        break;
+    }
 
-    return $form;
-  }
+    $form_state->setRedirect('entity.contributors.canonical', ['contributors' => $entity->id()]);
 
-  /**
-   * {@inheritdoc}
-   */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
-    // Create a new entity and set its values from the form submission.
-    $entity = \Drupal::entityTypeManager()
-      ->getStorage('contributors')
-      ->create([
-        'drupal_id' => $form_state->getValue('drupal_id'),
-        'drupal_org_username' => $form_state->getValue('drupal_org_username'),
-      ]);
-
-    // Save the entity to the database.
-    $entity->save();
-
-    // Optionally, display a message to the user upon successful submission.
-    $this->messenger->addMessage($this->t('Contributor added successfully.'));
+    return $result;
   }
 
 }
