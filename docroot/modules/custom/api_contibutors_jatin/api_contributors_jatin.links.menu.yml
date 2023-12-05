@@ -1,0 +1,7 @@
+entity.contributors.listing:
+  title: 'API Contributors'
+  description: 'View and Add all the drupal.org contributors.'
+  route_name: entity.contributors.list
+  parent: system.admin_structure
+  weight: 99
+  menu_name: admin
