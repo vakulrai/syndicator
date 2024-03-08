@@ -1,0 +1,20 @@
+entity.contributors.list:
+  path: '/admin/structure/contributors'
+  defaults:
+    # _entity_list: 'contributors'
+    _title: 'Contributors'
+  requirements:
+    _permission: 'administer'
+  parent: system.admin_structure
+  weight: 1
+
+entity.contributors.add_form:
+  path: '/admin/structure/contributors/add'
+  defaults:
+    _form: '\Drupal\api_contributors_jatin\Form\ContributorsDetailsForm'
+    _title: 'Add Contributor'
+  requirements:
+    _permission: 'add contributors'
+  options:
+    _admin_route: TRUE
+

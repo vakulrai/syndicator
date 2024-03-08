@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions for the your_module module.
+ */
+
+use Drupal\Core\Database\Database;
+
+/**
+ * Implements hook_schema().
+ */
+function api_contributors_jatin_schema() {
+  $schema['contributors'] = [
+    'description' => 'Store user case study details',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique row ID.',
+      ],
+      'drupal_id' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => "drupal.org contributors User id",
+      ],
+      'drupal_username' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => "drupal.org contributors User name",
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+  return $schema;
+}
+
+/**
+ * Implements hook_install().
+ */
+function api_contributors_jatin_install() {
+  $schema = api_contributors_jatin_schema();
+  if (!Database::getConnection()->schema()->tableExists('contributors')) {
+    Database::getConnection()->schema()->createTable('contributors', $schema);
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function api_contributors_jatin_uninstall() {
+  if (Database::getConnection()->schema()->findTables('contributors')) {
+    Database::getConnection()->schema()->dropTable('contributors');
+  }
+}

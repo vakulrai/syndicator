@@ -1,0 +1,8 @@
+name: 'API Contributors Jatin'
+type: module
+description: 'Defines the Contributors entity for API Contributors.'
+package: Custom
+core_version_requirement: ^8 || ^9 || ^10
+core: 9
+dependencies:
+  - user
